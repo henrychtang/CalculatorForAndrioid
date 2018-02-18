@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_CLEAR;
 import static android.view.KeyEvent.KEYCODE_NUMPAD_ADD;
@@ -78,9 +80,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case KEYCODE_NUMPAD_ENTER:
                     if (isValidQuery(textView.getText().toString())) {
-                        history.add(textView.getText().toString());
+                        history.add(textView.getText().toString()+"=");
                         calculationEngine.analyseQueryString(textView.getText().toString());
-                        textView.setText(calculationEngine.calculate() + "");
+                        DecimalFormat df = new DecimalFormat("###.##############");
+                        textView.setText(df.format(calculationEngine.calculate()) + "");
                         showingAnswer = true;
                         textViewHistory.setText(history.toPrinttableString());
                     }else if(!textView.getText().toString().equals("")){
@@ -95,19 +98,19 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case KEYCODE_NUMPAD_MULTIPLY:
                     showingAnswer = false;
-                    textView.setText(textView.getText().toString() + "x");
+                    textView.setText(textView.getText().toString() + " x ");
                     break;
                 case KEYCODE_NUMPAD_DIVIDE:
                     showingAnswer = false;
-                    textView.setText(textView.getText().toString() + "/");
+                    textView.setText(textView.getText().toString() + " / ");
                     break;
                 case KEYCODE_NUMPAD_ADD:
                     showingAnswer = false;
-                    textView.setText(textView.getText().toString() + "+");
+                    textView.setText(textView.getText().toString() + " + ");
                     break;
                 case KEYCODE_NUMPAD_SUBTRACT:
                     showingAnswer = false;
-                    textView.setText(textView.getText().toString() + "-");
+                    textView.setText(textView.getText().toString() + " - ");
                     break;
                 default:
                     Log.i("Text (Default action)", pressedKey + "");

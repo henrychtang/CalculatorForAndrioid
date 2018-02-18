@@ -1,5 +1,7 @@
 package home.henry.calculator;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class History {
         houseHouseHistory();
         String history = "";
         for (String line : historyList) {
+            Log.i("history ",line);
             history = history + "\n" + line;
         }
         return history;
