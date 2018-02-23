@@ -1,5 +1,6 @@
 package home.henry.calculator;
 
+import android.app.Activity;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.text.DecimalFormat;
 
@@ -20,20 +24,25 @@ import static android.view.KeyEvent.KEYCODE_NUMPAD_ENTER;
 import static android.view.KeyEvent.KEYCODE_NUMPAD_MULTIPLY;
 import static android.view.KeyEvent.KEYCODE_NUMPAD_SUBTRACT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     protected KeyboardView keyboardView;
     protected TextView textView, textViewHistory;
     CalculationEngine calculationEngine = new CalculationEngine();
     History history=new History();
 
-    protected String queryString = "8/2+5x2-8";
+    protected String queryString = "1x2";
     boolean showingAnswer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         textView = findViewById(R.id.textView_input);
         textViewHistory = findViewById(R.id.textView_history);
         keyboardView = (KeyboardView) findViewById(R.id.keyboard_view);

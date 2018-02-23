@@ -18,12 +18,13 @@ public class History {
         houseHouseHistory();
         String history = "";
         for (String line : historyList) {
-            Log.i("history ",line);
-            history = history + "\n" + line;
+            Log.i("history ", line);
+            history = history + line + "\n";
         }
         return history;
     }
-    void add(String line){
+
+    void add(String line) {
         historyList.add(line);
     }
 }
